@@ -1,0 +1,22 @@
+defaults: &defaults
+  adapter: mysql2
+  host: localhost
+  username: root
+  password: "work123"
+
+development:
+  <<: *defaults
+  database: pengpeng_d
+
+test: &test
+  <<: *defaults
+  database: pengpeng_t
+
+production:
+  <<: *defaults
+  database: pengpeng_p
+
+cucumber:
+  <<: *test
+
+
