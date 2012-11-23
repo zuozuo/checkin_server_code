@@ -1,18 +1,9 @@
 Pengpeng::Application.routes.draw do
 
-  get "users/index"
+  resources :users
 
-  get "users/show"
 
-  get "users/new"
-
-  get "users/edit"
-
-  get "users/update"
-
-  get "users/create"
-
-  get "users/destroy"
+  resources :posts
 
   devise_scope :user do
     root :to => "users#index"
