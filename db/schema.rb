@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123052537) do
+ActiveRecord::Schema.define(:version => 20121123064109) do
+
+  create_table "feedbacks", :force => true do |t|
+    t.string   "comment"
+    t.integer  "post_id"
+    t.integer  "user_space_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "feedbacks", ["post_id", "user_space_id"], :name => "index_feedbacks_on_post_id_and_user_space_id"
+  add_index "feedbacks", ["user_space_id"], :name => "index_feedbacks_on_user_space_id"
 
   create_table "posts", :force => true do |t|
     t.string   "title"
@@ -21,6 +32,29 @@ ActiveRecord::Schema.define(:version => 20121123052537) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "shares", :force => true do |t|
+    t.string   "post_id"
+    t.integer  "user_space_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "shares", ["post_id"], :name => "index_shares_on_post_id"
+  add_index "shares", ["user_space_id"], :name => "index_shares_on_user_space_id"
+
+  create_table "user_spaces", :force => true do |t|
+    t.string   "name"
+    t.string   "social"
+    t.integer  "types"
+    t.integer  "user_id"
+    t.integer  "share_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_spaces", ["name", "social", "types"], :name => "index_user_spaces_on_name_and_social_and_types"
+  add_index "user_spaces", ["social", "types"], :name => "index_user_spaces_on_social_and_types"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
