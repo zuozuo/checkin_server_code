@@ -1,10 +1,5 @@
 Pengpeng::Application.routes.draw do
 
-  resources :users
-
-
-  resources :posts
-
   devise_scope :user do
     root :to => "users#index"
     get "sign_up", :to => "devise/registrations#new", :as => :sign_up
@@ -13,6 +8,13 @@ Pengpeng::Application.routes.draw do
 
   # devise_for :users, :controllers => {:registrations => "registrations", :sessions => "sessions"}
   devise_for :users
+
+  resources :users do
+    resources :posts
+  end
+
+  resources :posts
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

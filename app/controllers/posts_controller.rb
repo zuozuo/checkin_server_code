@@ -1,11 +1,13 @@
 class PostsController < ApplicationController
+
+  set_rest_resource
+
   def index
     @posts = Post.all
     respond_with(@posts)
   end
 
   def show
-    @post = Post.find(params[:id])
     respond_with(@post)
   end
 
@@ -15,7 +17,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    binding.pry
   end
 
   def create
@@ -25,13 +27,11 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
     @post.update_attributes(params[:post])
     respond_with(@post)
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     respond_with(@post)
   end
