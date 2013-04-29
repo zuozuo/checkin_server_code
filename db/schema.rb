@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123064109) do
+ActiveRecord::Schema.define(:version => 20121123085356) do
 
   create_table "feedbacks", :force => true do |t|
     t.string   "comment"
@@ -31,7 +31,10 @@ ActiveRecord::Schema.define(:version => 20121123064109) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "types"
   end
+
+  add_index "posts", ["user_id", "types"], :name => "index_posts_on_user_id_and_types"
 
   create_table "shares", :force => true do |t|
     t.string   "post_id"
